@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Map</title>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.1/dist/leaflet.css" />
+	<script src="https://unpkg.com/leaflet@1.0.1/dist/leaflet.js"></script>
+</head>
+<body>
+	<div id="map" style="width: 600px; height: 400px"></div>
+</body>
+<style type="text/css">
+	#map { height: 480px; }
+</style>
+<script type="text/javascript">
+	
+
+	$(document).ready(function(){
+		var planes = [
+		["RS Grestina",-6.208763,106.845599],
+		["Stasiun",-6.210165,106.850002]
+		];
+
+		var map = L.map('map').setView([-6.208763, 106.845599], 8);
+		mapLink = 
+		'<a href="http://openstreetmap.org">OpenStreetMap</a>';
+		L.tileLayer(
+			'http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+				attribution: '&copy; ' + mapLink + ' Contributors',
+				maxZoom: 18,
+			}).addTo(map);
+
+		for (var i = 0; i < planes.length; i++) {
+			console.log(planes[i][1]);
+			marker = new L.marker([planes[i][1],planes[i][2]])
+			.bindPopup(planes[i][0])
+			.addTo(map);
+		}
+	});
+</script>
+</html>
